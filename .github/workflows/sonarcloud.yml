@@ -23,7 +23,7 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip install pytest
-        pip install sonar-scanner
+        pip install sonar-scanner==4.6.2
     - name: Run tests with coverage
       run: pytest --cov=./
     - name: Upload coverage report to SonarCloud
