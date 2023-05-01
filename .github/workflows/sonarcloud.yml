@@ -1,32 +1,27 @@
-name: SonarCloud
+name: Python CI
 
-on:
-  push:
-    branches:
-      - '**'
+on: [push]
 
 jobs:
-  sonarcloud-check:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout the code
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-        submodules: 'recursive'
+    - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.10'
+        python-version: '3.8'
     - name: Install dependencies
       run: |
-        python3 -m pip install --upgrade pip
-        pip install pytest
-        pip install sonar-scanner==4.6.2
-    - name: Run tests with coverage
-      run: pytest --cov=./
-    - name: Upload coverage report to SonarCloud
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Test with pytest
+      run: |
+        pytest
+    - name: Analyze code with SonarCloud
+      uses: SonarSource/sonarcloud-github-action@master
       env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: sonar-scanner -Dsonar.coverage.reportPaths=coverage.xml
