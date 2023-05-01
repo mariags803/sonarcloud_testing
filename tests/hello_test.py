@@ -1,3 +1,6 @@
+import sys
+sys.path.append('./src')
+
 from src.hello import say_hello
 
 
