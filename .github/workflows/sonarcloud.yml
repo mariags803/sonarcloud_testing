@@ -20,8 +20,8 @@ jobs:
         pip install pytest-cov
     - name: Test with pytest
       run: |
+        ls src/
         pytest tests/ --cov=./src --cov-report=xml:coverage.xml
-        ls
     - name: Analyze code with SonarCloud
       uses: SonarSource/sonarcloud-github-action@master
       env:
