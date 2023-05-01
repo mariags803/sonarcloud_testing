@@ -19,7 +19,7 @@ jobs:
         pip install -r requirements.txt
     - name: Test with pytest
       run: |
-        pytest
+        pytest --cov=./src --cov-report xml:coverage.xml
     - name: Analyze code with SonarCloud
       uses: SonarSource/sonarcloud-github-action@master
       env:
