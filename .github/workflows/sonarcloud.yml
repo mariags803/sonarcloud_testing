@@ -21,13 +21,12 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pytest --cov=src tests/ --cov-report=xml:coverage.xml  
-        cp coverage.xml src/coverage.xml
+        pytest --cov=src tests/ --cov-report=xml:coverage.xml
         ls
         cat coverage.xml
 
     - name: Override Coverage Source Path for Sonar
-      run: sed -i "s/<source>\/home\/runner\/work\/sonarcloud_testing\/sonarcloud_testing\/src<\/source>/<source>\/github\/workspace<\/source>/g" /home/runner/work/sonarcloud_testing/sonarcloud_testing/src/coverage.xml
+      run: sed -i "s/<source>\/home\/runner\/work\/sonarcloud_testing\/sonarcloud_testing\/src<\/source>/<source>\/github\/workspace<\/source>/g" /home/runner/work/sonarcloud_testing/sonarcloud_testing/coverage.xml
 
     - name: Analyze code with SonarCloud
       uses: SonarSource/sonarcloud-github-action@master
