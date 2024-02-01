@@ -11,10 +11,15 @@ on:
       - main
 
 jobs:
-  build:
-
+  check-repository-information:
     runs-on: ubuntu-latest
-
+    steps:
+      - name: Check repository information
+        run: |
+          echo "Repository Name: ${{ github.repository }}"
+          echo "Head Repository Name: ${{ github.event.workflow_run.head_repository }}"
+  build:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
