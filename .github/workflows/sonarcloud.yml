@@ -11,17 +11,9 @@ on:
       - main
 
 jobs:
-  check-repository-information:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check repository information
-        run: |
-          echo "Repository Name: ${{ github.repository }}"
-          echo "Event: ${{ toJson(github.event) }}"
-          
-
   build:
     runs-on: ubuntu-latest
+    if: ${{ !github.event.repository.fork }}
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
