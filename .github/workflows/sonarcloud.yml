@@ -17,7 +17,7 @@ jobs:
       - name: Check repository information
         run: |
           echo "Repository Name: ${{ github.repository }}"
-          echo "Head Repository Name: ${{ github.event.workflow_run.head_repository }}"
+          echo "Head Repository Name: ${{ github.event.workflow_run.head_repository.repo }}"
   build:
     runs-on: ubuntu-latest
     steps:
